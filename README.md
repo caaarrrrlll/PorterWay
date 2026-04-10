@@ -29,3 +29,42 @@ Sigue estos pasos para levantar PorterWay en tu entorno local:
    ```bash
    git clone [https://github.com/caaarrrrlll/porterway.git](https://github.com/caaarrrrlll/porterway.git)
    cd porterway
+Instalar las dependencias:
+
+Bash
+npm install
+Iniciar el servidor de desarrollo:
+
+Bash
+npm run dev
+Abrir la plataforma:
+Ve a tu navegador y visita http://localhost:3000. Serás redirigido automáticamente a la pantalla de inicio de sesión.
+
+🔑 Acceso de Prueba (Testing)
+Para evaluar el Dashboard y el sistema CRUD sin necesidad de registrar una cuenta nueva, utiliza las siguientes credenciales de administrador pre-configuradas:
+
+Email: admin@admin.com
+
+Contraseña: 123456
+
+📁 Estructura del Proyecto (MVC)
+El código fuente está organizado para respetar el patrón Modelo-Vista-Controlador de forma nativa en Next.js:
+
+Plaintext
+├── app/
+│   ├── (auth)/login/       # VISTA: Pantalla de inicio de sesión
+│   ├── api/auth/           # CONTROLADOR: Validación de credenciales
+│   ├── dashboard/          # SECCIÓN PROTEGIDA (Panel Logístico)
+│   │   ├── page.tsx        # VISTA: Lista de paquetes/solicitudes (Read & Delete)
+│   │   ├── create/         # VISTA: Formulario de nueva solicitud (Create)
+│   │   └── [id]/edit/      # VISTA: Formulario de modificación (Update)
+├── lib/
+│   ├── actions.ts          # CONTROLADORES: Lógica CRUD (Server Actions)
+│   └── data.ts             # MODELO: Base de datos en memoria para testing
+👨‍💻 Autor
+Carlos Moreta
+
+
+---
+
+¡Con esto tu proyecto no solo muestra que sabes programar con las últimas herramientas, sino que también sabes estructurar un producto real con un propósito claro de negocio! Mucho éxito con **PorterWay**.
