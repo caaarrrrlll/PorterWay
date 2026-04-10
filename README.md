@@ -1,70 +1,36 @@
-# 🚚 PorterWay - Plataforma de Logística y Entrega de Paquetes
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-**PorterWay** es una aplicación web diseñada para revolucionar la entrega de paquetes. Nuestra plataforma conecta a usuarios que necesitan enviar artículos con conductores disponibles, permitiendo el transporte seguro de carga sin importar la cantidad o el tamaño.
+## Getting Started
 
-Este proyecto ha sido desarrollado como una aplicación Fullstack utilizando **Next.js 15 (App Router)**, implementando rigurosamente el patrón de diseño **MVC (Modelo-Vista-Controlador)** para garantizar un código escalable y mantenible.
+First, run the development server:
 
-## ✨ Características Principales
-
-* **📦 Gestión de Envíos (CRUD):** Los usuarios pueden crear, visualizar, editar y cancelar solicitudes de transporte de paquetes en tiempo real.
-* **🔒 Rutas Protegidas:** Sistema de autenticación integrado que asegura que solo los usuarios registrados puedan acceder al Dashboard logístico.
-* **🏗️ Arquitectura MVC Estricta:** Separación clara de responsabilidades en el código:
-  * **Modelo:** Gestión del estado y datos de los paquetes (`lib/data.ts`).
-  * **Vistas:** Interfaces de usuario interactivas y responsivas construidas con React y Tailwind CSS.
-  * **Controladores:** Lógica de negocio procesada a través de *Next.js Server Actions* (`lib/actions.ts`).
-* **⚡ In-Memory Database:** Utiliza un estado en memoria para el almacenamiento de datos, lo que permite clonar, ejecutar y probar la aplicación instantáneamente sin requerir configuración de bases de datos externas (como SQLite o PostgreSQL) durante la fase de desarrollo/testing.
-
-## 🛠️ Tecnologías Utilizadas
-
-* **Framework:** [Next.js](https://nextjs.org/) (App Router)
-* **Estilos:** Tailwind CSS
-* **Backend:** Next.js Server Actions
-* **Autenticación:** Sistema de sesión JWT (Configuración de prueba integrada)
-
-## 🚀 Instalación y Ejecución Local
-
-Sigue estos pasos para levantar PorterWay en tu entorno local:
-
-1. **Clonar el repositorio:**
-   ```bash
-   git clone [https://github.com/caaarrrrlll/porterway.git](https://github.com/caaarrrrlll/porterway.git)
-   cd porterway
-Instalar las dependencias:
-
-Bash
-npm install
-Iniciar el servidor de desarrollo:
-
-Bash
+```bash
 npm run dev
-Abrir la plataforma:
-Ve a tu navegador y visita http://localhost:3000. Serás redirigido automáticamente a la pantalla de inicio de sesión.
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-🔑 Acceso de Prueba (Testing)
-Para evaluar el Dashboard y el sistema CRUD sin necesidad de registrar una cuenta nueva, utiliza las siguientes credenciales de administrador pre-configuradas:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Email: admin@admin.com
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-Contraseña: 123456
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-📁 Estructura del Proyecto (MVC)
-El código fuente está organizado para respetar el patrón Modelo-Vista-Controlador de forma nativa en Next.js:
+## Learn More
 
-Plaintext
-├── app/
-│   ├── (auth)/login/       # VISTA: Pantalla de inicio de sesión
-│   ├── api/auth/           # CONTROLADOR: Validación de credenciales
-│   ├── dashboard/          # SECCIÓN PROTEGIDA (Panel Logístico)
-│   │   ├── page.tsx        # VISTA: Lista de paquetes/solicitudes (Read & Delete)
-│   │   ├── create/         # VISTA: Formulario de nueva solicitud (Create)
-│   │   └── [id]/edit/      # VISTA: Formulario de modificación (Update)
-├── lib/
-│   ├── actions.ts          # CONTROLADORES: Lógica CRUD (Server Actions)
-│   └── data.ts             # MODELO: Base de datos en memoria para testing
-👨‍💻 Autor
-Carlos Moreta
+To learn more about Next.js, take a look at the following resources:
 
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
----
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-¡Con esto tu proyecto no solo muestra que sabes programar con las últimas herramientas, sino que también sabes estructurar un producto real con un propósito claro de negocio! Mucho éxito con **PorterWay**.
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
