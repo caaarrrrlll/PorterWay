@@ -1,0 +1,121 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f4f6f8;
+  color: #333;
+}
+.dashboard__sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.dashboard__sidebar-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+.dashboard__sidebar-link:hover {
+  background-color: rgb(57.6967741935, 81.3, 104.9032258065);
+}
+.dashboard__content {
+  flex: 1;
+  padding: 2rem;
+}
+.dashboard__card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+}
+.dashboard__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.dashboard__table th, .dashboard__table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+.dashboard__table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+.dashboard__table tr:hover {
+  background-color: #f1f3f5;
+}
+.dashboard__table-score {
+  font-weight: bold;
+  color: #27ae60;
+}
+.dashboard__form {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.dashboard__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.dashboard__form-input, .dashboard__form-select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.dashboard__action-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.dashboard__action-button:hover {
+  background-color: #eee;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.status-badge--pending {
+  background-color: #f1c40f;
+  color: #000;
+}
+.status-badge--in-transit {
+  background-color: #3498db;
+  color: #fff;
+}
+.status-badge--completed {
+  background-color: #27ae60;
+  color: #fff;
+}
+.status-badge--delayed {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.dashboard__action-button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.dashboard__action-button:hover {
+  background-color: #eee;
+}/*# sourceMappingURL=dashboard.module.css.map */

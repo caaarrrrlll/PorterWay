@@ -1,0 +1,77 @@
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f4f6f8;
+}
+.login__card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+.login__title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.login__input {
+  padding: 12px;
+  border: 1px solid #94a3b8;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #f8fafc;
+  color: #1f2937;
+}
+.login__input::-moz-placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+.login__input::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+.login__input:focus {
+  border-color: #2c3e50;
+  background-color: white;
+  box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.15);
+}
+.login__button {
+  padding: 12px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.login__button:hover {
+  background-color: rgb(62.0967741935, 87.5, 112.9032258065);
+}
+.login__buttonSecondary {
+  padding: 12px;
+  text-align: center;
+  background-color: white;
+  color: #2c3e50;
+  border: 1px solid #2c3e50;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.login__buttonSecondary:hover {
+  background-color: #eef2f7;
+}/*# sourceMappingURL=login.module.css.map */

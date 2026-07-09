@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Role {
+  id          Int      @id @default(autoincrement())
+  code        String   @unique
+  name        String
+  description String?
+  users       User[]
+}
+
+model User {
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
+  username         String?  @unique
+  firstName        String
+  lastName         String
+  password         String
+  vehicleType      String?
+  zone             String?
+  birthDate        DateTime?
+  roleId           Int
+  role             Role     @relation(fields: [roleId], references: [id])
+  
+  // Relaciones duales con los pedidos
+  ordersAsSupervisor Order[]  @relation("SupervisorOrders")
+  ordersAsPorter     Order[]  @relation("PorterOrders")
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  orders      Order[]
+}
+
+model Order {
+  id               Int       @id @default(autoincrement())
+  code             String    @unique
+  title            String
+  description      String?
+  status           String    // Open, In Progress, Completed, Canceled
+  priority         String    // Low, Medium, High
+  zone             String?
+  
+  // Variables para el Core Matemático
+  estimatedTime    Int?      // Tiempo en minutos (Ej: 120 para 2 horas)
+  actualTime       Int?      // Tiempo real empleado en minutos
+  totalWeight      Float?    // Peso real verificado en sitio
+  totalVolume      Float?    // Volumen calculado
+  clientRating     Int?      // Calificación del cliente 1 a 5
+  efficiencyScore  Float?    // Puntaje final calculado por el sistema
+  
+  categoryId       Int
+  category         Category  @relation(fields: [categoryId], references: [id])
+  
+  supervisorId     Int?
+  supervisor       User?     @relation("SupervisorOrders", fields: [supervisorId], references: [id])
+  
+  porterId         Int?
+  porter           User?     @relation("PorterOrders", fields: [porterId], references: [id])
+  
+  createdAt        DateTime  @default(now())
+  completedAt      DateTime?
+
+  items            Item[]
+  tasks            Task[]
+}
+
+model Item {
+  id             Int      @id @default(autoincrement())
+  description    String
+  weight         Float    // Peso del objeto individual
+  dimensionsBase String   // Ej: "120x80x100 cm"
+  orderId        Int
+  order          Order    @relation(fields: [orderId], references: [id])
+}
+
+model Task {
+  id             Int      @id @default(autoincrement())
+  phase          String   // Carga, Transito, Descarga, Incidencia
+  description    String
+  timeSpent      Int?     // Tiempo consumido en esta tarea en minutos
+  startAt        DateTime?
+  endAt          DateTime?
+  orderId        Int
+  order          Order    @relation(fields: [orderId], references: [id])
+}
+
+model Order {
+  id        String   @id @default(uuid())
+  // ... tus otros campos
+  createdAt DateTime @default(now()) // Vital para el filtrado
+}
