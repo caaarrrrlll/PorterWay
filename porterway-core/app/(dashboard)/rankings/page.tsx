@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from '@/styles/dashboard.module.scss';
 
@@ -51,8 +51,8 @@ export function DateRangeFilter() {
   );
 }
 
-// --- Página Principal ---
-export default function RankingsPage() {
+// --- Contenido Principal ---
+function RankingsContent() {
   const searchParams = useSearchParams();
   const [porters, setPorters] = useState<PorterRanking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -182,5 +182,14 @@ export default function RankingsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+// --- Página Principal (Wrapper con Suspense) ---
+export default function RankingsPage() {
+  return (
+    <Suspense fallback={<div>Cargando página...</div>}>
+      <RankingsContent />
+    </Suspense>
   );
 }
