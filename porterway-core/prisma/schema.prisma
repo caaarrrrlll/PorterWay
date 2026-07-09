@@ -15,9 +15,9 @@ model Role {
 }
 
 model User {
-  id               Int      @id @default(autoincrement())
-  email            String   @unique
-  username         String?  @unique
+  id               Int       @id @default(autoincrement())
+  email            String    @unique
+  username         String?   @unique
   firstName        String
   lastName         String
   password         String
@@ -25,11 +25,11 @@ model User {
   zone             String?
   birthDate        DateTime?
   roleId           Int
-  role             Role     @relation(fields: [roleId], references: [id])
+  role             Role      @relation(fields: [roleId], references: [id])
   
   // Relaciones duales con los pedidos
-  ordersAsSupervisor Order[]  @relation("SupervisorOrders")
-  ordersAsPorter     Order[]  @relation("PorterOrders")
+  ordersAsSupervisor Order[]   @relation("SupervisorOrders")
+  ordersAsPorter     Order[]   @relation("PorterOrders")
 }
 
 model Category {
@@ -64,7 +64,7 @@ model Order {
   
   porterId         Int?
   porter           User?     @relation("PorterOrders", fields: [porterId], references: [id])
-  
+
   createdAt        DateTime  @default(now())
   completedAt      DateTime?
 
@@ -90,10 +90,4 @@ model Task {
   endAt          DateTime?
   orderId        Int
   order          Order    @relation(fields: [orderId], references: [id])
-}
-
-model Order {
-  id        String   @id @default(uuid())
-  // ... tus otros campos
-  createdAt DateTime @default(now()) // Vital para el filtrado
 }

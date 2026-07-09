@@ -3,9 +3,13 @@ import { OrderRepository } from '@/lib/core/repositories/OrderRepository';
 
 const repository = new OrderRepository();
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const orderId = parseInt(params.id);
+    const { id } = await params;
+    const orderId = parseInt(id);
     const { porterId } = await request.json();
 
     const order = await repository.getById(orderId);

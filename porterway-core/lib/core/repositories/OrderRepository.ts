@@ -45,4 +45,19 @@ export class OrderRepository {
       orderBy: { createdAt: 'desc' }
     });
   }
+
+  async getByCode(code: string) {
+    return await prisma.order.findUnique({
+      where: { code },
+      // Para la vista pública de trazabilidad se incluye información limitada
+      select: {
+        code: true,
+        title: true,
+        status: true,
+        zone: true,
+        priority: true,
+        createdAt: true
+      }
+    });
+  }
 }

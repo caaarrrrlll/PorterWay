@@ -40,4 +40,11 @@ export const OrderService = {
     if (!response.ok) throw new Error('Error al obtener las órdenes');
     return response.json();
   },
+
+  trackOrderByCode: async (code: string) => {
+    const response = await fetch(`/api/v1/orders/track/${code}`);
+    if (!response.ok) throw new Error('Orden no encontrada');
+    return response.json();
+  }
+  
 };

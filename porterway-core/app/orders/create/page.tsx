@@ -1,78 +1,87 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { OrderService } from '@/lib/services/api/orderService';
 
-interface Order {
-  id: number;
-  code: string;
-  title: string;
-  status: string;
-  priority: string;
-  zone: string;
-  porter?: { firstName: string; lastName: string };
-}
+export default function CreateOrderPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    zone: '',
+    priority: 'Low',
+    categoryId: 1,
+    totalWeight: 0
+  });
 
-export default function OrdersListPage() {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
-
-  const fetchOrders = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      const data = await OrderService.getAllOrders();
-      setOrders(data);
+      await OrderService.createOrder(formData);
+      router.push('/orders'); // Redirige a la tabla principal
     } catch (error) {
       console.error(error);
+      alert('Error al crear la orden. Asegúrate de que el Category ID exista en la base de datos.');
     } finally {
       setLoading(false);
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'categoryId' || name === 'totalWeight' ? Number(value) : value
+    }));
+  };
+
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Gestión de Envíos</h1>
+    <div className="p-6 max-w-2xl mx-auto">
+      <h1 className="text-2xl font-bold mb-6 text-gray-800">Nueva Guía de Remisión</h1>
       
-      {loading ? (
-        <p>Cargando órdenes...</p>
-      ) : (
-        <div className="overflow-x-auto bg-white rounded-lg shadow">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-gray-600 border-b">
-                <th className="p-4">Código</th>
-                <th className="p-4">Título</th>
-                <th className="p-4">Zona</th>
-                <th className="p-4">Prioridad</th>
-                <th className="p-4">Estado</th>
-                <th className="p-4">Transportista Asignado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((order) => (
-                <tr key={order.id} className="border-b hover:bg-gray-50">
-                  <td className="p-4 font-medium">{order.code}</td>
-                  <td className="p-4">{order.title}</td>
-                  <td className="p-4">{order.zone}</td>
-                  <td className="p-4">
-                    <span className={`px-2 py-1 rounded text-xs font-bold ${
-                      order.priority === 'High' ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'
-                    }`}>
-                      {order.priority}
-                    </span>
-                  </td>
-                  <td className="p-4">{order.status}</td>
-                  <td className="p-4 text-gray-500">
-                    {order.porter ? `${order.porter.firstName} ${order.porter.lastName}` : 'Sin asignar'}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow border border-gray-200 flex flex-col gap-4 text-black">
+        <div>
+          <label className="block text-sm font-medium mb-1">Título</label>
+          <input type="text" name="title" required value={formData.title} onChange={handleChange} className="w-full border p-2 rounded bg-white text-black" />
         </div>
-      )}
+
+        <div>
+          <label className="block text-sm font-medium mb-1">Descripción</label>
+          <textarea name="description" value={formData.description} onChange={handleChange} className="w-full border p-2 rounded bg-white text-black" />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Zona</label>
+            <input type="text" name="zone" required value={formData.zone} onChange={handleChange} className="w-full border p-2 rounded bg-white text-black" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Prioridad</label>
+            <select name="priority" value={formData.priority} onChange={handleChange} className="w-full border p-2 rounded bg-white text-black">
+              <option value="Low">Baja (Low)</option>
+              <option value="Medium">Media (Medium)</option>
+              <option value="High">Alta (High)</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Peso Total (kg)</label>
+            <input type="number" step="0.1" name="totalWeight" required value={formData.totalWeight} onChange={handleChange} className="w-full border p-2 rounded bg-white text-black" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">ID de Categoría</label>
+            <input type="number" name="categoryId" required value={formData.categoryId} onChange={handleChange} className="w-full border p-2 rounded bg-white text-black" />
+          </div>
+        </div>
+
+        <button type="submit" disabled={loading} className="mt-4 bg-blue-600 text-white p-3 rounded font-bold hover:bg-blue-700 disabled:bg-gray-400">
+          {loading ? 'Guardando...' : 'Crear Orden'}
+        </button>
+      </form>
     </div>
   );
 }
