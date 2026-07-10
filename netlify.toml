@@ -2,3 +2,6 @@
   base = "porterway-core"
   command = "npm install && npx prisma generate && npm run build"
   publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
