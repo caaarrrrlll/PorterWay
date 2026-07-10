@@ -1,4 +1,4 @@
-﻿[build]
+[build]
   base = "porterway-core"
   command = "npm install && npx prisma generate && npm run build"
   publish = ".next"
